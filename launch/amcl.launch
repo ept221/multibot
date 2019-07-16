@@ -83,9 +83,9 @@
     <!-- Remap topics to account for a namespace that AMCL has been -->
     <!-- pushed down into. -->
     <remap from="scan"                      to="$(arg scan_topic)"/>
-    <remap from="map"												to="$(arg map_topic)"/>
-    <remap from="static_map"								to="$(arg static_map_topic)"/>
-    <remap from="odom"											to="$(arg odom_topic)"/>
+    <remap from="map"                       to="$(arg map_topic)"/>
+    <remap from="static_map"                to="$(arg static_map_topic)"/>
+    <remap from="odom"                      to="$(arg odom_topic)"/>
   </node>
   
 </launch>
