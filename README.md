@@ -6,7 +6,7 @@ To launch the package, run: `roslaunch multi multi/launch/start`. The main launc
 
 ## Configure the Package
 ### Add Another Bot:
-To add another turtlebot to the system, open the start.launch file and insert the following:
+To add another turtlebot to the system, open the start.launch file and insert the following after the map server node:
 ```xml
 <include file="single.launch">
 	<arg name="name" value="INSERT STRING HERE"/>
