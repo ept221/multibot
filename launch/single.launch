@@ -1,0 +1,51 @@
+<launch>
+	<arg name="name"	default="robot"/>
+	<arg name="tf_prefix" value="$(arg name)_tf"/>
+	
+	<!-- These are the initial pose arguments which get sent to the Gazebo model in the "real" world -->
+	<arg name="x_pose" default="0.0"/>
+	<arg name="y_pose" default="0.0"/>
+	<arg name="z_pose" default="0.0"/>
+	<arg name="R_pose" default="0.0"/>
+	<arg name="P_pose" default="0.0"/>
+	<arg name="Y_pose" default="0.0"/>
+	
+	<!-- These are the inital pose arguments which get sent to the AMCL node to tell it where -->
+	<!-- the robot is on the map. They default to the same values as the ones which are -->
+	<!-- sent to Gazebo, but you can override them if you have to. You might need to do -->
+	<!-- this if your map is rotated relitive to the Gazebo world, because then the -->
+	<!-- Gazebo coordinates will not line up with the AMCL map coordinates. -->
+	<arg name="x_pose_amcl" default="$(arg x_pose)"/>
+	<arg name="y_pose_amcl" default="$(arg y_pose)"/>
+	<arg name="Y_pose_amcl" default="$(arg Y_pose)"/>
+	
+	<group ns="$(arg name)">
+	
+		<!-- Load a turtlebot into Gazebo -->
+		<include file="simBot.launch">
+			<arg name="name" value="$(arg name)"/>
+			<arg name="tf_prefix" value="$(arg tf_prefix)"/>
+			<arg name="x_pose" value="$(arg x_pose)"/>
+			<arg name="y_pose" value="$(arg y_pose)"/>
+			<arg name="z_pose" value="$(arg z_pose)"/>
+			<arg name="R_pose" value="$(arg R_pose)"/>
+			<arg name="P_pose" value="$(arg P_pose)"/>
+			<arg name="Y_pose" value="$(arg Y_pose)"/>
+		</include>
+		
+		<!-- Add AMCL to the bot -->
+		<include file="amcl.launch">
+			<arg name="tf_prefix" value="$(arg tf_prefix)"/>
+			<arg name="x_pose" value="$(arg x_pose_amcl)"/>
+			<arg name="y_pose" value="$(arg y_pose_amcl)"/>
+			<arg name="Y_pose" value="$(arg Y_pose_amcl)"/>
+		</include>
+		
+		<!-- Add move_base to the bot-->
+		<include file="move_base.launch">
+			<arg name="tf_prefix" value="$(arg tf_prefix)"/>
+		</include>
+		
+	</group>
+	
+</launch>

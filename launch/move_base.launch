@@ -1,0 +1,54 @@
+<launch>
+
+  <include file="$(find turtlebot_navigation)/launch/includes/velocity_smoother.launch.xml"/>
+  <include file="$(find turtlebot_navigation)/launch/includes/safety_controller.launch.xml"/>
+  
+  <arg name="tf_prefix"/>
+  
+  <!-- I do not know why odom_frame_id and base_frame_id need to be odom and base_footprint, -->
+  <!-- and aren't $(tf_prefix)/odom and $(tf_prefix)/base_footprint like in the AMCL launch file. -->
+  <!-- The global frame_frame_id is /map, just like in the AMCL launch file, which makes sense -->
+  <!-- because in this particular system, all the robots share a common global map -->
+  <arg name="odom_frame_id"   default="/$(arg tf_prefix)/odom"/>
+  <arg name="base_frame_id"   default="/$(arg tf_prefix)/base_footprint"/>
+  <arg name="global_frame_id" default="/map"/>
+  
+  <!-- Here the odom_topic and the laser_topic are set to odom and scan and NOT /odom and /scan because -->
+  <!-- we want to access the local topics used by a particular robot in a namespace and NOT a global -->
+  <!-- topic like one that would be published by a regular single robot system -->
+  <arg name="odom_topic" default="odom" />
+  <arg name="laser_topic" default="scan"/>
+  
+  <arg name="custom_param_file" default="$(find turtlebot_navigation)/param/dummy.yaml"/>
+	
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    <rosparam file="$(find multibot)/include/param/costmap_common_params.yaml" command="load" ns="global_costmap"/>
+    <rosparam file="$(find multibot)/include/param/costmap_common_params.yaml" command="load" ns="local_costmap"/>   
+    <rosparam file="$(find multibot)/include/param/local_costmap_params.yaml" command="load"/>
+    <rosparam file="$(find multibot)/include/param/global_costmap_params.yaml" command="load"/>
+    <rosparam file="$(find multibot)/include/param/dwa_local_planner_params.yaml" command="load" />
+    <rosparam file="$(find multibot)/include/param/move_base_params.yaml" command="load"/>
+    <rosparam file="$(find multibot)/include/param/global_planner_params.yaml" command="load"/>
+    <rosparam file="$(find multibot)/include/param/navfn_global_planner_params.yaml" command="load"/>
+    
+    <!-- External params file that could be loaded into the move_base namespace -->
+    <rosparam file="$(arg custom_param_file)" command="load"/>
+    
+    <!-- Reset frame_id parameters using user input data -->
+    <param name="global_costmap/global_frame" value="$(arg global_frame_id)"/>
+    <param name="global_costmap/robot_base_frame" value="$(arg base_frame_id)"/>
+    <param name="local_costmap/global_frame" value="$(arg odom_frame_id)"/>
+    <param name="local_costmap/robot_base_frame" value="$(arg base_frame_id)"/>
+    <param name="DWAPlannerROS/global_frame_id" value="$(arg odom_frame_id)"/>
+
+    <remap from="cmd_vel" to="navigation_velocity_smoother/raw_cmd_vel"/>
+    <remap from="odom" to="$(arg odom_topic)"/>
+    <remap from="scan" to="$(arg laser_topic)"/>
+    <remap from="map" to="/map"/>
+  </node>
+  
+  <!-- Tune the turtlebot's max acceleration so that it doesn't overshoot on sharp turns -->
+  <param name="move_base/DWAPlannerROS/max_rot_vel" value="1.0"/>
+  <param name="move_base/DWAPlannerROS/acc_lim_theta" value="10.0"/>
+  
+</launch>

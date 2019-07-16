@@ -1,0 +1,91 @@
+<launch>
+	
+  <arg name="tf_prefix"/>
+
+  <!-- These arguments are used to set the the inital AMCL pose -->
+	<arg name="x_pose"/>
+	<arg name="y_pose"/>
+	<arg name="Y_pose"/>
+
+  <!-- Setting up the frame_id's properly in AMCL is critical to getting the multibot -->
+  <!-- system to work. The odom_frame_id and base_frame_id MUST have tf_prefix/ attached -->
+  <!-- to the beginnings of the names used for a single robot system, (in this case -->
+  <!-- odom and base_footprint. Note that the global_frame_id is /map. This is because -->
+  <!-- in this particular setup, a common map is shared by all the robots. -->
+  <arg name="odom_frame_id"   default="$(arg tf_prefix)/odom"/>
+  <arg name="base_frame_id"   default="$(arg tf_prefix)/base_footprint"/>
+  <arg name="global_frame_id" default="/map"/>
+
+  <!-- Note that the scan_topic and the odom_topic are NOT the usual /scan and /odom. -->
+  <!-- The leading / has been removed because in this system each robot is inside its own -->
+  <!-- namespace and we want to access the local scan and odom topics specific to a -->
+  <!-- particular robot, and NOT a global topic, like one which would be published in -->
+  <!-- a regular single robot system. Also note that since in this particular setup -->
+  <!-- all the robots share a common map, map_topic and static_map_topic ARE global topics -->
+  <!-- and so they have a leading / -->
+  <arg name="scan_topic"      default="scan"/>
+  <arg name="odom_topic"      default="odom"/>
+  <arg name="map_topic"       default="/map"/>
+  <arg name="static_map_topic" default="/static_map"/>
+
+  <node pkg="amcl" type="amcl" name="amcl" output="screen">
+    
+    <!-- Make AMCL get it's map from a topic, because -->
+    <!-- the action server might not work well in a namespace -->
+    <!-- or with tf prefixes -->
+    <param name="use_map_topic"             value="true"/>
+    
+    <!-- Publish scans from best pose at a max of 10 Hz -->
+    <param name="odom_model_type"           value="diff"/>
+    <param name="odom_alpha5"               value="0.1"/>
+    <param name="gui_publish_rate"          value="10.0"/>
+    <param name="laser_max_beams"           value="60"/>
+    <param name="laser_max_range"           value="12.0"/>
+    <param name="min_particles"             value="500"/>
+    <param name="max_particles"             value="2000"/>
+    <param name="kld_err"                   value="0.05"/>
+    <param name="kld_z"                     value="0.99"/>
+    <param name="odom_alpha1"               value="0.2"/>
+    <param name="odom_alpha2"               value="0.2"/>
+    
+    <!-- translation std dev, m -->
+    <param name="odom_alpha3"               value="0.2"/>
+    <param name="odom_alpha4"               value="0.2"/>
+    <param name="laser_z_hit"               value="0.5"/>
+    <param name="laser_z_short"             value="0.05"/>
+    <param name="laser_z_max"               value="0.05"/>
+    <param name="laser_z_rand"              value="0.5"/>
+    <param name="laser_sigma_hit"           value="0.2"/>
+    <param name="laser_lambda_short"        value="0.1"/>
+    <param name="laser_model_type"          value="likelihood_field"/>
+    
+    <!-- <param name="laser_model_type" value="beam"/> -->
+    <!-- I'm not sure why the parameter above is commented it out. -->
+    <!-- It was like that in the original AMCL file -->
+    <param name="laser_likelihood_max_dist" value="2.0"/>
+    <param name="update_min_d"              value="0.25"/>
+    <param name="update_min_a"              value="0.2"/>
+    <param name="odom_frame_id"             value="$(arg odom_frame_id)"/> 
+    <param name="base_frame_id"             value="$(arg base_frame_id)"/> 
+    <param name="global_frame_id"           value="$(arg global_frame_id)"/>
+    <param name="resample_interval"         value="1"/>
+    
+    <!-- Increase tolerance because the computer can get quite busy -->
+    <param name="transform_tolerance"       value="1.0"/>
+    <param name="recovery_alpha_slow"       value="0.0"/>
+    <param name="recovery_alpha_fast"       value="0.0"/>
+    
+    <!-- Set the initial position of the robot -->
+    <param name="initial_pose_x"            value="$(arg x_pose)"/>
+    <param name="initial_pose_y"            value="$(arg y_pose)"/>
+    <param name="initial_pose_a"            value="$(arg Y_pose)"/>
+    
+    <!-- Remap topics to account for a namespace that AMCL has been -->
+    <!-- pushed down into. -->
+    <remap from="scan"                      to="$(arg scan_topic)"/>
+    <remap from="map"												to="$(arg map_topic)"/>
+    <remap from="static_map"								to="$(arg static_map_topic)"/>
+    <remap from="odom"											to="$(arg odom_topic)"/>
+  </node>
+  
+</launch>

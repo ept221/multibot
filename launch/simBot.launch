@@ -1,0 +1,59 @@
+<launch>
+	<arg name="name"/>
+	<arg name="tf_prefix"/>
+
+  <!-- initial pose arguments -->
+	<arg name="x_pose"/>
+	<arg name="y_pose"/>
+	<arg name="z_pose"/>
+	<arg name="R_pose"/>
+	<arg name="P_pose"/>
+	<arg name="Y_pose"/>
+
+	<!-- Args for robot model-->
+	<arg name="base"      value="$(optenv TURTLEBOT_BASE kobuki)"/> 
+	<arg name="battery"   value="$(optenv TURTLEBOT_BATTERY /proc/acpi/battery/BAT0)"/>
+	<arg name="stacks"    value="$(optenv TURTLEBOT_STACKS hexagons)"/> 
+	<arg name="3d_sensor" value="$(optenv TURTLEBOT_3D_SENSOR kinect)"/>	
+	
+	<param name="tf_prefix" value="$(arg tf_prefix)"/>
+	
+	<!-- Start the robot base -->
+	<include file="kobuki.launch">
+		<arg name="name" value="$(arg name)"/>
+		
+		<arg name="x_pose" value="$(arg x_pose)"/>
+		<arg name="y_pose" value="$(arg y_pose)"/>
+		<arg name="z_pose" value="$(arg z_pose)"/>
+		<arg name="R_pose" value="$(arg R_pose)"/>
+		<arg name="P_pose" value="$(arg P_pose)"/>
+		<arg name="Y_pose" value="$(arg Y_pose)"/>
+			
+		<arg name="base" value="$(arg base)"/>
+		<arg name="stacks" value="$(arg stacks)"/>
+		<arg name="3d_sensor" value="$(arg 3d_sensor)"/>
+	</include>
+	
+	<!-- Start the robot state publisher -->
+	<node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+		<param name="publish_frequency" type="double" value="30.0" />
+		<param name="tf_prefix" value="$(arg tf_prefix)"/>
+	</node>
+
+	<!-- Start the fake laser scanner -->
+	<!-- Be careful, this looks identical to the original sourcecode for a single robot -->
+	<!-- however there are several important differences. First, the output_frame_id -->
+	<!-- has been changed from camera_depth_frame to $(arg tf_prefix)/camera_depth_frame. -->
+	<!-- Secondly, the image topic has used to be /camera/depth/image_raw but now has the -->
+	<!-- leading / removed, because this entire file is inside a namespace and we want to -->
+	<!-- stay inside it. For the same reason, the line remaping scan to /scan has been removed. -->
+  <node pkg="nodelet" type="nodelet" name="laserscan_nodelet_manager" args="manager"/>
+  <node pkg="nodelet" type="nodelet" name="depthimage_to_laserscan"
+        args="load depthimage_to_laserscan/DepthImageToLaserScanNodelet laserscan_nodelet_manager">
+    <param name="scan_height" value="10"/>
+    <param name="output_frame_id" value="$(arg tf_prefix)/camera_depth_frame"/>
+    <param name="range_min" value="0.45"/>
+    <remap from="image" to="camera/depth/image_raw"/>
+  </node>
+	
+</launch>

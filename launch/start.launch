@@ -1,0 +1,34 @@
+<launch>
+
+	<!-- Get commandline arguments, if any. -->
+	<arg name="world_file" default="$(find multibot)/worlds/maze.world"/>
+	<arg name="map_file" default="$(find multibot)/maps/map.yaml"/>
+	
+	<!-- Start the Gazebo simulator and load the world. -->
+	<include file="world.launch">
+		<arg name="world_file" value="$(arg world_file)"/>
+	</include>
+
+	<!-- Start map_server node. This map is shared by all the robots. -->
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)">
+  	<param name="frame_id" value="/map" />
+  </node>
+
+	<!-- Launch a robot equipped with AMCL and move_base into Gazebo. -->
+	<include file="single.launch">
+		<arg name="name" value="robot1"/>
+		<arg name="x_pose" value="1.0"/>
+		<arg name="y_pose" value="1.0"/>
+	</include>
+	
+	<!-- Launch a robot equipped with AMCL and move_base into Gazebo. -->
+	<include file="single.launch">
+		<arg name="name" value="robot2"/>
+		<arg name="x_pose" value="-1.0"/>
+		<arg name="y_pose" value="1.0"/>
+	</include>	
+		
+	<!-- Start up the rviz node -->
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find multibot)/launch/myRviz.rviz"/>
+	
+</launch>

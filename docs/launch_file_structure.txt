@@ -1,0 +1,48 @@
+Launch file structure for a system of two robots:
+Files beginning with a * are from external packages
+and their child launch files are not shown.
+All other files are local to the multi package, and
+all share a common directery path: multi/launch.
+All extentions to these local files are: .launch. 
+
+start
+|
+- world
+| |
+| - *gazebo_ros/launch/empty_world.launch
+|
+|
+|
+- single
+| |
+| - simBot
+| | |
+| | - kobuki
+| |   |
+| |   - *turtlebot_bringup/launch/includes/kobuki/bumper2pc.launch.xml
+| | 
+| - amcl
+| |
+| - move_base
+|   |
+|   - *turtlebot_navigation/launch/includes/velocity_smoother.launch.xml
+|   |
+|   - *turtlebot_navigatoin/launch/includes/safety_controller.launch.xml
+|
+|
+|
+- single
+  |
+  - simBot
+  | |
+  | - kobuki
+  |   |
+  |   - *turtlebot_bringup/launch/includes/kobuki/bumper2pc.launch.xml
+  | 
+  - amcl
+  |
+  - move_base
+    |
+    - *turtlebot_navigation/launch/includes/velocity_smoother.launch.xml
+    |
+    - *turtlebot_navigatoin/launch/includes/safety_controller.launch.xml

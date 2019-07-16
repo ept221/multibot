@@ -1,0 +1,39 @@
+<launch>
+
+  <!-- This argument is more important than it looks. Even though in this system the robot is -->
+  <!-- launched in its own namespace, the namespace is NOT automatically used as the model -->
+  <!-- name in Gazebo, so this has to be done manualy. -->
+	<arg name="name"/>
+	
+	<!-- These arguments are used to set the initial pose of the robot in Gazebo. -->
+	<arg name="x_pose"/>
+	<arg name="y_pose"/>
+	<arg name="z_pose"/>
+	<arg name="R_pose"/>
+	<arg name="P_pose"/>
+	<arg name="Y_pose"/>
+	
+  <arg name="base"/>
+  <arg name="stacks"/>
+  <arg name="3d_sensor"/>
+  
+  <arg name="urdf_file" default="$(find xacro)/xacro.py '$(find turtlebot_description)/robots/$(arg base)_$(arg stacks)_$(arg 3d_sensor).urdf.xacro'" />
+  <param name="robot_description" command="$(arg urdf_file)" />
+  
+  <!-- Gazebo model spawner -->
+  <!-- Note that the unique name and pose arguments are passed in the giant ugly argument string -->
+  <node name="spawn_turtlebot_model" pkg="gazebo_ros" type="spawn_model"
+        args="-x $(arg x_pose) -y $(arg y_pose) -z $(arg z_pose) -R $(arg R_pose) -P $(arg P_pose) -Y $(arg Y_pose) -unpause -urdf -param robot_description -model $(arg name)"/>
+  
+  <!-- Velocity muxer -->
+  <node pkg="nodelet" type="nodelet" name="mobile_base_nodelet_manager" args="manager"/>
+  <node pkg="nodelet" type="nodelet" name="cmd_vel_mux"
+        args="load yocs_cmd_vel_mux/CmdVelMuxNodelet mobile_base_nodelet_manager">
+    <param name="yaml_cfg_file" value="$(find turtlebot_bringup)/param/mux.yaml" />
+    <remap from="cmd_vel_mux/output" to="mobile_base/commands/velocity"/>
+  </node>
+
+  <!-- Bumper/cliff to pointcloud (not working, as it needs sensors/core messages) -->
+  <include file="$(find turtlebot_bringup)/launch/includes/kobuki/bumper2pc.launch.xml"/>
+  
+</launch>
