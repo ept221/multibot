@@ -22,7 +22,7 @@
 	<group ns="$(arg name)">
 	
 		<!-- Load a turtlebot into Gazebo -->
-		<include file="simBot.launch">
+		<include file="$(find multibot)/launch/simBot.launch">
 			<arg name="name" value="$(arg name)"/>
 			<arg name="tf_prefix" value="$(arg tf_prefix)"/>
 			<arg name="x_pose" value="$(arg x_pose)"/>
@@ -34,7 +34,7 @@
 		</include>
 		
 		<!-- Add AMCL to the bot -->
-		<include file="amcl.launch">
+		<include file="$(find multibot)/launch/amcl.launch">
 			<arg name="tf_prefix" value="$(arg tf_prefix)"/>
 			<arg name="x_pose" value="$(arg x_pose_amcl)"/>
 			<arg name="y_pose" value="$(arg y_pose_amcl)"/>
@@ -42,7 +42,7 @@
 		</include>
 		
 		<!-- Add move_base to the bot-->
-		<include file="move_base.launch">
+		<include file="$(find multibot)/launch/move_base.launch">
 			<arg name="tf_prefix" value="$(arg tf_prefix)"/>
 		</include>
 		

@@ -19,7 +19,7 @@
 	<param name="tf_prefix" value="$(arg tf_prefix)"/>
 	
 	<!-- Start the robot base -->
-	<include file="kobuki.launch">
+	<include file="$(find multibot)/launch/kobuki.launch">
 		<arg name="name" value="$(arg name)"/>
 		
 		<arg name="x_pose" value="$(arg x_pose)"/>

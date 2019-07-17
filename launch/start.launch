@@ -5,7 +5,7 @@
 	<arg name="map_file" default="$(find multibot)/maps/map.yaml"/>
 	
 	<!-- Start the Gazebo simulator and load the world. -->
-	<include file="world.launch">
+	<include file="$(find multibot)/launch/world.launch">
 		<arg name="world_file" value="$(arg world_file)"/>
 	</include>
 
@@ -15,14 +15,14 @@
   </node>
 
 	<!-- Launch a robot equipped with AMCL and move_base into Gazebo. -->
-	<include file="single.launch">
+	<include file="$(find multibot)/launch/single.launch">
 		<arg name="name" value="robot1"/>
 		<arg name="x_pose" value="1.0"/>
 		<arg name="y_pose" value="1.0"/>
 	</include>
 	
 	<!-- Launch a robot equipped with AMCL and move_base into Gazebo. -->
-	<include file="single.launch">
+	<include file="$(find multibot)/launch/single.launch">
 		<arg name="name" value="robot2"/>
 		<arg name="x_pose" value="-1.0"/>
 		<arg name="y_pose" value="1.0"/>
