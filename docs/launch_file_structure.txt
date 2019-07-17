@@ -2,7 +2,7 @@ Launch file structure for a system of two robots:
 Files beginning with a * are from external packages
 and their child launch files are not shown.
 All other files are local to the multi package, and
-all share a common directery path: multi/launch.
+all share a common directory path: multi/launch.
 All extentions to these local files are: .launch. 
 
 start
