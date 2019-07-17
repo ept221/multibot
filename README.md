@@ -5,7 +5,7 @@ Multibot is a ROS Kinetic package that allows for the simulation of multiple tur
 To launch the package, run: `roslaunch multibot start.launch`. The main launch file start.launch has two optional commandline arguments: world_file, and map_file. If these are not provided, a default world and map will be loaded. To load a cusom world and file run: `roslaunch multibot start.launch world_file:=customWorld.world map_file:=customMap.yaml`, where `customWorld.world` and `customMap.yaml` are your custom files.
 
 ## Adding Another Bot
-To add another turtlebot to the system, open the _start.launch_ file and insert the following after the map server node:
+To add another turtlebot to the system, open the `start.launch` file and insert the following after the map server node:
 ```xml
 <include file="single.launch">
 	<arg name="name" value="INSERT STRING HERE"/>
