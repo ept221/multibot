@@ -8,6 +8,7 @@ To launch the package, run: `roslaunch multibot start.launch`. The main launch f
 To add another turtlebot to the system, open the `start.launch` file and insert the following after the map server node:
 ```xml
 <include file="single.launch">
+	
 	<arg name="name" value="INSERT STRING HERE"/>
 	
 	<arg name="x_pose" value="INSERT FLOAT HERE"/>
@@ -20,6 +21,7 @@ To add another turtlebot to the system, open the `start.launch` file and insert 
 	<arg name="x_pose_amcl" value="INSERT FLOAT HERE"/>
 	<arg name="y_pose_amcl" value="INSERT FLOAT HERE"/>
 	<arg name="Y_pose_amcl" value="INSERT FLOAT HERE"/>
+	
 </include>
 ```
 where `name` is the unique string which shall identify the new robot, where `x_pose`, `y_pose`, and `z_pose` are floats giving the initial 3D cartesian coordinates of the robot in the Gazebo world, where `R_pose`, `P_pose`, and `Y_pose` are floats giving the initial role, pitch, and yaw of the robot in the Gazebo world, and where `x_pose_amcl`, `y_pose_amcl`, and `Y_pose_amcl` are floats giving the inital 2D cartesian coordinates and the yaw of the robot in the map used by the navigation stack.
