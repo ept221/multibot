@@ -27,7 +27,7 @@ start
 |   |
 |   - *turtlebot_navigation/launch/includes/velocity_smoother.launch.xml
 |   |
-|   - *turtlebot_navigatoin/launch/includes/safety_controller.launch.xml
+|   - *turtlebot_navigation/launch/includes/safety_controller.launch.xml
 |
 |
 |
