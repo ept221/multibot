@@ -4,11 +4,13 @@
   <include file="$(find turtlebot_navigation)/launch/includes/safety_controller.launch.xml"/>
   
   <arg name="tf_prefix"/>
-  
-  <!-- I do not know why odom_frame_id and base_frame_id need to be odom and base_footprint, -->
-  <!-- and aren't $(tf_prefix)/odom and $(tf_prefix)/base_footprint like in the AMCL launch file. -->
-  <!-- The global frame_frame_id is /map, just like in the AMCL launch file, which makes sense -->
-  <!-- because in this particular system, all the robots share a common global map -->
+	
+  <!-- odom_frame_id and base_frame_id MUST begin with /$(arg tf_prefix). It needs to include -->	
+  <!-- the tf_prefix because this move_base module is local to a specific robot and not some global -->
+  <!-- system. However, for some reason a / MUST come before the tf_prefix otherwise an error is -->
+  <!-- generated. This is strange because it implies that if a / were not attached at the beginning -->
+  <!-- the path would NOT default to the global /, but to some other prefix. I have no idea why that is.-->
+  <!-- The global_frame_id is simply /map, since all the robot are sharing a commong map. -->
   <arg name="odom_frame_id"   default="/$(arg tf_prefix)/odom"/>
   <arg name="base_frame_id"   default="/$(arg tf_prefix)/base_footprint"/>
   <arg name="global_frame_id" default="/map"/>
