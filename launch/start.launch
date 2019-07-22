@@ -39,6 +39,6 @@
 	</include>	
 		
 	<!-- Start up the rviz node -->
-	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find multibot)/launch/myRviz.rviz"/>
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find multibot)/rviz/myRviz.rviz"/>
 	
 </launch>
