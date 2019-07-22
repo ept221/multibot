@@ -17,10 +17,6 @@ def callback(msg):
   pub.publish(msg)
   print msg
 
-
-#sub_topic = "/" + sys.argv[1] + "initialpose/patch"
-#pub_topic = "/" + sys.argv[1] + "initialpose/"
-
 sub_topic = "initialpose/patch"
 pub_topic = "initialpose/"
 
