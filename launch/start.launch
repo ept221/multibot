@@ -19,6 +19,11 @@
 		<arg name="name" value="robot1"/>
 		<arg name="x_pose" value="1.0"/>
 		<arg name="y_pose" value="1.0"/>
+		
+		<!-- Correct for the rotation in the default map-->
+		<arg name="x_pose_amcl" value="0.0"/>
+		<arg name="y_pose_amcl" value="1.55"/>
+		<arg name="Y_pose_amcl" value="0.25"/>
 	</include>
 	
 	<!-- Launch a robot equipped with AMCL and move_base into Gazebo. -->
@@ -26,6 +31,11 @@
 		<arg name="name" value="robot2"/>
 		<arg name="x_pose" value="-1.0"/>
 		<arg name="y_pose" value="1.0"/>
+		
+		<!-- Correct for the rotation in the default map-->
+		<arg name="x_pose_amcl" value="-1.8"/>
+		<arg name="y_pose_amcl" value ="1.0"/>
+		<arg name="Y_pose_amcl" value="0.25"/>
 	</include>	
 		
 	<!-- Start up the rviz node -->
