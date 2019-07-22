@@ -46,6 +46,8 @@
 			<arg name="tf_prefix" value="$(arg tf_prefix)"/>
 		</include>
 		
+		<node name="pose_estimate_patcher" pkg="multibot" type="pose_estimate_patcher.py" args="$(arg name)"/>
+		
 	</group>
 	
 </launch>

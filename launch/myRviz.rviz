@@ -588,9 +588,9 @@ Visualization Manager:
       Hide Inactive Objects: true
     - Class: rviz/Select
     - Class: rviz/SetInitialPose
-      Topic: /robot1/initialpose
+      Topic: /robot1/initialpose/patch
     - Class: rviz/SetInitialPose
-      Topic: /robot2/initialpose
+      Topic: /robot2/initialpose/patch
     - Class: rviz/SetGoal
       Topic: /robot1/move_base_simple/goal
     - Class: rviz/SetGoal
