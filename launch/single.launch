@@ -46,6 +46,8 @@
 			<arg name="tf_prefix" value="$(arg tf_prefix)"/>
 		</include>
 		
+		<!-- Start a node to correct the pose estimate messages published by rviz so that-->
+		<!-- they are properly formatted for the multi-robot system -->
 		<node name="pose_estimate_patcher" pkg="multibot" type="pose_estimate_patcher.py" args="$(arg name)"/>
 		
 	</group>
