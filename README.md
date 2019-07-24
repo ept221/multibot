@@ -2,7 +2,7 @@
 Multibot is a ROS Kinetic package that allows for the simulation of multiple turtlebots in Gazebo, each with their own navigation stack, sharing a common map, and all visualized in rviz.
 
 ## Dependencies 
-This package is dependent on the following ROS packages:
+This package is dependent on the following ROS Kinetic packages:
 * amcl
 * gazebo_ros
 * map_server
