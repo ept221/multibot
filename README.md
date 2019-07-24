@@ -15,6 +15,29 @@ This package is dependent on the following ROS Kinetic packages:
 * turtlebot_navigation
 * xacro
 
+## Installation
+First, open a terminal and create a catkin workspace by running the following:
+```bash
+mkdir -p catkin_ws/src
+cd catkin_ws/src
+catkin_init_workspace
+```
+We named our workspace `catkin_ws`, but this choice was arbitrary. Next clone the multibot repository:
+```bash
+git clone https://github.com/ept221/multibot.git
+```
+
+Then move up a directory and build the package:
+```bash
+cd ..
+catkin_make
+```
+Finally add this line to your `.bashrc` file in your home directory to source the package.
+```bash
+source ~/catkin_ws/devel/setup.bash
+```
+Restart your terminal and you should be ready to go.
+
 ## Running the Package 
 To launch the package, run: `roslaunch multibot start.launch`. The main launch file start.launch has two optional commandline arguments: world_file, and map_file. If these are not provided, a default world and map will be loaded. To load a cusom world and file run: `roslaunch multibot start.launch world_file:=customWorld.world map_file:=customMap.yaml`, where `customWorld.world` and `customMap.yaml` are your custom files.
 
