@@ -1,24 +1,6 @@
 # Multibot 
 Multibot is a ROS Kinetic package that allows for the simulation of multiple turtlebots in Gazebo, each with their own navigation stack, sharing a common map, and all visualized in rviz.
 
-## Dependencies 
-This package is dependent on the following ROS Kinetic packages:
-* amcl
-* gazebo_ros
-* geometry_msgs
-* map_server
-* move_base
-* nodelet
-* robot_state_publisher
-* roscpp
-* rospy
-* rviz
-* std_msgs
-* turtlebot_bringup
-* turtlebot_description
-* turtlebot_navigation
-* xacro
-
 ## Installation
 First, open a terminal and create a catkin workspace by running the following:
 ```bash
@@ -41,6 +23,30 @@ Finally add this line to your `.bashrc` file in your home directory to source th
 source ~/catkin_ws/devel/setup.bash
 ```
 Restart your terminal and you should be ready to go.
+
+## Dependencies 
+The top level dependencies for this ROS Kinetic package are:
+* amcl
+* gazebo_ros
+* geometry_msgs
+* map_server
+* move_base
+* nodelet
+* robot_state_publisher
+* roscpp
+* rospy
+* rviz
+* std_msgs
+* turtlebot_bringup
+* turtlebot_description
+* turtlebot_navigation
+* xacro
+
+To confrim the top-level dependencies, run:
+```rospack depends1 multibot```
+To view the complete dependency list, run:
+```rospack depends multibot```
+
 
 ## Running the Package 
 To launch the package, run: `roslaunch multibot start.launch`. The main launch file start.launch has two optional commandline arguments: world_file, and map_file. If these are not provided, a default world and map will be loaded. To load a cusom world and file run: `roslaunch multibot start.launch world_file:=customWorld.world map_file:=customMap.yaml`, where `customWorld.world` and `customMap.yaml` are your custom files.
