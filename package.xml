@@ -2,24 +2,24 @@
 <package format="2">
   <name>multibot</name>
   <version>0.0.0</version>
-  <description>The multibot package</description>
+  <description>Multibot is a ROS Kinetic package that allows for the simulation of multiple turtlebots in Gazebo, each with their own navigation stack, sharing a common map, and all visualized in rviz.</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <!-- Example:  -->
   <!-- <maintainer email="jane.doe@example.com">Jane Doe</maintainer> -->
-  <maintainer email="ezra.thomas@todo.todo">ezra.thomas</maintainer>
+  <maintainer email="ezra150@gmail.com">Ezra Thomas</maintainer>
 
 
   <!-- One license tag required, multiple allowed, one license per tag -->
   <!-- Commonly used license strings: -->
   <!--   BSD, MIT, Boost Software License, GPLv2, GPLv3, LGPLv2.1, LGPLv3 -->
-  <license>TODO</license>
+  <license>MIT</license>
 
 
   <!-- Url tags are optional, but multiple are allowed, one per tag -->
   <!-- Optional attribute type can be: website, bugtracker, or repository -->
   <!-- Example: -->
-  <!-- <url type="website">http://wiki.ros.org/multibot</url> -->
+  <!-- <url type="website">https://github.com/ept221/multibot</url> -->
 
 
   <!-- Author tags are optional, multiple are allowed, one per tag -->
@@ -49,15 +49,54 @@
   <!-- Use doc_depend for packages you need only for building documentation: -->
   <!--   <doc_depend>doxygen</doc_depend> -->
   <buildtool_depend>catkin</buildtool_depend>
+  
   <build_depend>roscpp</build_depend>
   <build_depend>rospy</build_depend>
   <build_depend>std_msgs</build_depend>
+  <build_depend>amcl</build_depend>
+  <build_depend>gazebo_ros</build_depend>
+  <build_depend>geometry_msgs</build_depend>
+  <build_depend>map_server</build_depend>
+  <build_depend>move_base</build_depend>
+  <build_depend>nodelet</build_depend>
+  <build_depend>robot_state_publisher</build_depend>
+  <build_depend>rviz</build_depend>
+  <build_depend>turtlebot_bringup</build_depend>
+  <build_depend>turtlebot_description</build_depend>
+  <build_depend>turtlebot_navigation</build_depend>
+  <build_depend>xacro</build_depend>  
+  
   <build_export_depend>roscpp</build_export_depend>
   <build_export_depend>rospy</build_export_depend>
   <build_export_depend>std_msgs</build_export_depend>
+  <build_export>amcl</build_export>
+  <build_export>gazebo_ros</build_export>
+  <build_export>geometry_msgs</build_export>
+  <build_export>map_server</build_export>
+  <build_export>move_base</build_export>
+  <build_export>nodelet</build_export>
+  <build_export>robot_state_publisher</build_export>
+  <build_export>rviz</build_export>
+  <build_export>turtlebot_bringup</build_export>
+  <build_export>turtlebot_description</build_export>
+  <build_export>turtlebot_navigation</build_export>
+  <build_export>xacro</build_export>
+  
   <exec_depend>roscpp</exec_depend>
   <exec_depend>rospy</exec_depend>
   <exec_depend>std_msgs</exec_depend>
+  <exec_depend>amcl</exec_depend>
+  <exec_depend>gazebo_ros</exec_depend>
+  <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>map_server</exec_depend>
+  <exec_depend>move_base</exec_depend>
+  <exec_depend>nodelet</exec_depend>
+  <exec_depend>robot_state_publisher</exec_depend>
+  <exec_depend>rviz</exec_depend>
+  <exec_depend>turtlebot_bringup</exec_depend>
+  <exec_depend>turtlebot_description</exec_depend>
+  <exec_depend>turtlebot_navigation</exec_depend>
+  <exec_depend>xacro</exec_depend>
 
 
   <!-- The export tag contains other, unspecified, tags -->
