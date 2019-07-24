@@ -1,6 +1,20 @@
 # Multibot 
 Multibot is a ROS Kinetic package that allows for the simulation of multiple turtlebots in Gazebo, each with their own navigation stack, sharing a common map, and all visualized in rviz.
 
+## Dependencies 
+This package is dependent on the following ROS packages:
+* amcl
+* gazebo_ros
+* map_server
+* move_base
+* nodelet
+* robot_state_publisher
+* rviz
+* turtlebot_bringup
+* turtlebot_description
+* turtlebot_navigation
+* xacro
+
 ## Running the Package 
 To launch the package, run: `roslaunch multibot start.launch`. The main launch file start.launch has two optional commandline arguments: world_file, and map_file. If these are not provided, a default world and map will be loaded. To load a cusom world and file run: `roslaunch multibot start.launch world_file:=customWorld.world map_file:=customMap.yaml`, where `customWorld.world` and `customMap.yaml` are your custom files.
 
