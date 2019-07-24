@@ -5,11 +5,15 @@ Multibot is a ROS Kinetic package that allows for the simulation of multiple tur
 This package is dependent on the following ROS Kinetic packages:
 * amcl
 * gazebo_ros
+* geometry_msgs
 * map_server
 * move_base
 * nodelet
 * robot_state_publisher
+* roscpp
+* rospy
 * rviz
+* std_msgs
 * turtlebot_bringup
 * turtlebot_description
 * turtlebot_navigation
