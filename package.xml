@@ -69,18 +69,18 @@
   <build_export_depend>roscpp</build_export_depend>
   <build_export_depend>rospy</build_export_depend>
   <build_export_depend>std_msgs</build_export_depend>
-  <build_export>amcl</build_export>
-  <build_export>gazebo_ros</build_export>
-  <build_export>geometry_msgs</build_export>
-  <build_export>map_server</build_export>
-  <build_export>move_base</build_export>
-  <build_export>nodelet</build_export>
-  <build_export>robot_state_publisher</build_export>
-  <build_export>rviz</build_export>
-  <build_export>turtlebot_bringup</build_export>
-  <build_export>turtlebot_description</build_export>
-  <build_export>turtlebot_navigation</build_export>
-  <build_export>xacro</build_export>
+  <build_export_depend>amcl</build_export_depend>
+  <build_export_depend>gazebo_ros</build_export_depend>
+  <build_export_depend>geometry_msgs</build_export_depend>
+  <build_export_depend>map_server</build_export_depend>
+  <build_export_depend>move_base</build_export_depend>
+  <build_export_depend>nodelet</build_export_depend>
+  <build_export_depend>robot_state_publisher</build_export_depend>
+  <build_export_depend>rviz</build_export_depend>
+  <build_export_depend>turtlebot_bringup</build_export_depend>
+  <build_export_depend>turtlebot_description</build_export_depend>
+  <build_export_depend>turtlebot_navigation</build_export_depend>
+  <build_export_depend>xacro</build_export_depend>
   
   <exec_depend>roscpp</exec_depend>
   <exec_depend>rospy</exec_depend>
