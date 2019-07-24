@@ -18,11 +18,11 @@ Then move up a directory and build the package:
 cd ..
 catkin_make
 ```
-Finally add this line to your `.bashrc` file in your home directory to source the package.
+Next, add this line to your `.bashrc` file in your home directory to source the package.
 ```bash
 source ~/catkin_ws/devel/setup.bash
 ```
-Restart your terminal and you should be ready to go.
+Finally, restart your terminal and you should be ready to go.
 
 ## Dependencies 
 The top level dependencies for this ROS Kinetic package are:
@@ -42,7 +42,7 @@ The top level dependencies for this ROS Kinetic package are:
 * turtlebot_navigation
 * xacro
 
-To confrim the top-level dependencies, run: `rospack depends1 multibot`. To view the complete dependency list, run: `rospack depends multibot`. To install all required dependencies, run: `rosdep install multibot`
+To confrim the list of top-level dependencies, run: `rospack depends1 multibot`. To view the complete dependency list, run: `rospack depends multibot`. To install all required dependencies, run: `rosdep install multibot`
 
 
 ## Running the Package 
