@@ -40,6 +40,7 @@ The top level dependencies for this ROS Kinetic package are:
 * turtlebot_bringup
 * turtlebot_description
 * turtlebot_navigation
+* turtlebot_teleop
 * xacro
 
 To confrim the list of top-level dependencies, run: `rospack depends1 multibot`. To view the complete dependency list, run: `rospack depends multibot`. To install all required dependencies, run: 
