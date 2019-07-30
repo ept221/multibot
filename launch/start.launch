@@ -2,7 +2,7 @@
 
 	<!-- Get commandline arguments, if any. -->
 	<arg name="world_file" default="$(find multibot)/worlds/maze.world"/>
-	<arg name="map_file" default="$(find multibot)/maps/map.yaml"/>
+	<arg name="map_file" default="$(find multibot)/maps/maze.yaml"/>
 	
 	<!-- Start the Gazebo simulator and load the world. -->
 	<include file="$(find multibot)/launch/world.launch">
