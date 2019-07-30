@@ -12,6 +12,11 @@ We named our workspace `catkin_ws`, but this choice was arbitrary. Next clone th
 ```bash
 git clone https://github.com/ept221/multibot.git
 ```
+To get a list of top-level dependencies, run: `rospack depends1 multibot`. To view the complete dependency list, run: `rospack depends multibot`. To install all required dependencies, run: 
+```
+rosdep update
+rosdep install multibot
+```
 
 Then move up a directory and build the package:
 ```bash
@@ -23,32 +28,6 @@ Next, add this line to your `.bashrc` file in your home directory to source the 
 source ~/catkin_ws/devel/setup.bash
 ```
 Finally, restart your terminal and you should be ready to go.
-
-## Dependencies 
-The top level dependencies for this ROS Kinetic package are:
-* amcl
-* gazebo_ros
-* geometry_msgs
-* map_server
-* move_base
-* nodelet
-* robot_state_publisher
-* roscpp
-* rospy
-* rviz
-* std_msgs
-* turtlebot_bringup
-* turtlebot_description
-* turtlebot_navigation
-* turtlebot_teleop
-* xacro
-
-To confrim the list of top-level dependencies, run: `rospack depends1 multibot`. To view the complete dependency list, run: `rospack depends multibot`. To install all required dependencies, run: 
-```
-rosdep update
-rosdep install multibot
-```
-
 
 ## Running the Package 
 To launch the package, run: `roslaunch multibot start.launch`. The main launch file start.launch has two optional commandline arguments: world_file, and map_file. If these are not provided, a default world and map will be loaded. To load a cusom world and file run: `roslaunch multibot start.launch world_file:=customWorld.world map_file:=customMap.yaml`, where `customWorld.world` and `customMap.yaml` are your custom files. Check out the `/worlds` and `/maps` directories to see other pre-made worlds/maps.
